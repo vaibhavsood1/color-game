@@ -1,0 +1,293 @@
+<html>
+<head>
+	<title>color guessing game</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/homepage.css">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900,900i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+	<style type="text/css">
+	.squares{
+	background-color: red;
+	width: 30%;
+	padding-bottom: 30%;
+	float: left;
+	margin: 1.66%;
+	border-radius: 15%;
+	transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+body{
+	background-color: black;
+
+}
+
+.one{
+	max-width: 600px;
+	text-align: center;
+	margin:0 auto;
+}
+
+h1{
+	color:white;
+	text-align: center;
+	
+	background-color: steelblue;
+	padding :2%;
+
+}
+
+.three{
+	background-color: white;
+	padding-left: 32%;
+}
+button{
+	background-color: white;
+	border-width:0px;
+	font-size: 1.4em;
+	font-weight: 600;
+	color: steelblue;
+	transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+
+}
+.nine{
+	margin-left: 28%;
+}
+#eight{
+	margin-left: 2%;
+}
+.upbody{
+	background-color: rgb(74, 123, 201);
+}
+button:hover{
+	background-color: steelblue;
+	color:white;
+
+}
+#colordisp{
+	font-size: 1.4em;
+	text-transform: uppercase;
+}
+.six{
+	margin-top: 5%;
+}
+.ac{
+	background-color: steelblue;
+	color:white;
+}
+	</style>
+</head>
+<body>
+
+<div class = "upbody">
+
+
+<div class = "five"><h1>The Great <br><span id = "colordisp">rgb(98, 155, 247)</span> <br>guessing game</h1>
+</div>
+<div class = "three"><button type="button"  id = "two">New Colors</button>
+	
+<span class = "nine"><button type="button"  id = "seven" class = "sixteen">Easy</button>
+<button type="button"  id = "eight" class = "fifteen">Hard</button></span>
+
+</div>
+<div class  = "conatiner one">
+
+<div class = "six">
+<div class = "squares"> </div>
+<div class = "squares"> </div>
+<div class = "squares"> </div>
+<div class = "squares"> </div>
+<div class = "squares"> </div>
+<div class = "squares"> </div>
+</div>
+
+
+
+
+
+
+</div>
+</div>
+
+<script>
+var x;
+var y;
+var z;
+var a;
+var ans;
+
+var v = document.querySelector("#two");
+var easyButton = document.querySelector("#seven");
+easyButton.addEventListener("click",easyMode);
+
+
+var hardButton = document.querySelector("#eight");
+hardButton.addEventListener("click",colorGen);
+
+
+
+
+var guess = document.querySelector("#colordisp");
+
+// var ans = "rgb(98, 155, 247)";
+var colors = [];
+
+var sq = document.querySelectorAll(".squares");
+
+for(var i = 0;i<sq.length;i++)
+{
+sq[i].addEventListener("click", function(){
+if(this.style.backgroundColor==ans)
+{
+	
+	for(var j = 0;j<sq.length;j++){
+		sq[j].style.backgroundColor = ans;
+	}
+}
+else
+{
+	this.style.backgroundColor = "black";
+}
+
+});
+
+}
+
+
+
+
+
+
+
+colorGen();
+
+
+
+var newcolors = document.querySelector("#two");
+newcolors.addEventListener("click",colorGen);
+
+
+
+function colorGen(){
+
+x = Math.floor((Math.random()*255)+1);
+y = Math.floor((Math.random()*255)+1);
+z = Math.floor((Math.random()*255)+1);
+a = Math.floor((Math.random()*6)+1);
+ans = "rgb("+x+", "+y+", "+z+")";
+guess.innerHTML = ans;
+for(var i = 0;i<6;i++)
+{
+     if(i==(a-1))
+  {
+	colors[i] = ans;
+  }
+else
+{
+x = Math.floor((Math.random()*255)+1);
+y = Math.floor((Math.random()*255)+1);
+z = Math.floor((Math.random()*255)+1);
+
+
+colors[i] = "rgb("+x+", "+y+", "+z+")";
+}
+}
+for(var i = 0;i<sq.length;i++)
+{
+sq[i].style.backgroundColor = colors[i];
+
+
+
+}
+easyButton.classList.remove("ac");
+hardButton.classList.add("ac");
+
+
+}
+
+function easyMode()
+{
+
+x = Math.floor((Math.random()*255)+1);
+y = Math.floor((Math.random()*255)+1);
+z = Math.floor((Math.random()*255)+1);
+a = Math.floor((Math.random()*3)+1);
+ans = "rgb("+x+", "+y+", "+z+")";
+guess.innerHTML = ans;
+for(var i = 0;i<3;i++)
+{
+     if(i==(a-1))
+  {
+	colors[i] = ans;
+  }
+else
+{
+x = Math.floor((Math.random()*255)+1);
+y = Math.floor((Math.random()*255)+1);
+z = Math.floor((Math.random()*255)+1);
+
+
+colors[i] = "rgb("+x+", "+y+", "+z+")";
+}
+}
+for(var i = 0;i<3;i++)
+{
+sq[i].style.backgroundColor = colors[i];
+}
+
+for(var i = 3;i<6;i++){
+sq[i].style.backgroundColor = "black" ;
+}
+
+
+easyButton.classList.add("ac");
+hardButton.classList.remove("ac");
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script> 	
+</body>
+</html>
